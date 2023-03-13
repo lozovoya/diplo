@@ -1,0 +1,11 @@
+---
+k8s_masters:
+  hosts:
+    kube-master-stage:
+      ansible_host: 158.160.58.222
+k8s_nodes:
+  hosts:
+    kube-node-0-stage:
+      ansible_host: 158.160.39.11
+    kube-node-1-stage:
+      ansible_host: 158.160.34.32

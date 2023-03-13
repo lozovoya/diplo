@@ -1,0 +1,52 @@
+---
+- name: Prepare servers
+  hosts: all
+  remote_user: "{{ user }}"
+  vars:
+    master_internal_ip: "{{ hostvars['k8s-master-01']['ansible_default_ipv4']['address']}}"
+    node_internal_ip: "{{ hostvars['k8s-node-01']['ansible_default_ipv4']['address']}}"
+  tasks:
+    - name: Set LC_CTYPE
+      become: true
+      ansible.builtin.lineinfile:
+        path: "/etc/default/locale"
+        line: 'LC_CTYPE="en_US.UTF-8"'
+        state: present
+    - name: Set LC_ALL
+      become: true
+      ansible.builtin.lineinfile:
+        path: "/etc/default/locale"
+        line: 'LC_ALL="en_US.UTF-8"'
+        state: present
+    - name: Apt update
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
+        allow_unauthenticated: true
+    - name: Upgrade to latest versions
+      become: true
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+    - name: Set a hostname
+      become: true
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
+    - name: disable swap
+      become: true
+      ansible.builtin.shell:
+        cmd: "swapoff -a"
+    - name: add master record to template
+      become: true
+      ansible.builtin.lineinfile:
+        path: "/etc/cloud/templates/hosts.debian.tmpl"
+        line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}"
+        state: present
+      loop: "{{ query('inventory_hostnames', 'all') }}"
+    - name: add master record to hosts
+      become: true
+      ansible.builtin.lineinfile:
+        path: "/etc/hosts"
+        line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}"
+        state: present
+      loop: "{{ query('inventory_hostnames', 'all') }}"

@@ -1,0 +1,23 @@
+#User: admin
+#Pass: prom-operator
+---
+- name: Install kube-prometheus stack
+  hosts: k8s_masters
+# remote_user: "{{ user }}"
+  remote_user: "debian"
+  tasks:
+    - name: Add prometheus repo
+      ansible.builtin.shell:
+        cmd: "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+    - name: Add charts repo
+      ansible.builtin.shell:
+        cmd: "helm repo add stable https://charts.helm.sh/stable"
+    - name: Update repos
+      ansible.builtin.shell:
+        cmd: "helm repo update"
+    - name: Create namespace monitoring
+      ansible.builtin.shell:
+        cmd: "kubectl create namespace monitoring"
+    - name: Install kube-prometheus stack
+      ansible.builtin.shell:
+        cmd: "helm install kind-prometheus prometheus-community/kube-prometheus-stack --namespace monitoring --set prometheus.service.nodePort=30000 --set prometheus.service.type=NodePort --set grafana.service.nodePort=31000 --set grafana.service.type=NodePort --set alertmanager.service.nodePort=32000 --set alertmanager.service.type=NodePort --set prometheus-node-exporter.service.nodePort=32001 --set prometheus-node-exporter.service.type=NodePort"
