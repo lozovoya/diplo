@@ -28,7 +28,7 @@ resource "yandex_compute_instance" "kube-master" {
   }
 
   metadata = {
-    ssh-keys = "admin:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "admin:${file("${var.ssh_key}")}"
   }
 
 
@@ -63,6 +63,6 @@ resource "yandex_compute_instance" "kube-node" {
   }
 
   metadata = {
-    ssh-keys = "admin:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "admin:${file("${var.ssh_key}")}"
   }
 }
