@@ -14,7 +14,7 @@ on:
 
 env:
  # verbosity setting for Terraform logs
- YA_KEY:  ${{ secrets.YANDEX_NETOLOGY }}
+ TF_VAR_ya_key:  ${{ secrets.YANDEX_NETOLOGY }}
 
 jobs:
  terraform:
