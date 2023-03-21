@@ -25,7 +25,6 @@ provider "yandex" {
 
   #service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key.json"
   service_account_key_file = "key"
-  #token = "${var.ya_token}"
   cloud_id                 = "$b1gjtddi41p742jcni7p"
   #folder_id = "b1gt34iu66r2p2svev1t"
 }
