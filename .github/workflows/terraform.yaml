@@ -43,18 +43,13 @@ jobs:
        run: |
            echo $TF_VAR_ya_file_enc | base64 -d > key
 
-     - name: print
-       id: ls
-       run: |
-           ls -lah
+     - name: branch
+       id: branchName
+       run: echo ${{ github.ref }}
 
      - name: Terraform init
        id: init
        run: terraform init
-
-#     - name: Terraform format
-#       id: fmt
-#       run: terraform fmt -check -diff
 
      - name: Terraform validate
        id: validate
