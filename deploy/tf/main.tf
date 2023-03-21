@@ -22,6 +22,7 @@ terraform {
 
 provider "yandex" {
   zone = "ru-central1-a"
+
   #service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key.json"
   service_account_key_file = "key"
   #token = "${var.ya_token}"

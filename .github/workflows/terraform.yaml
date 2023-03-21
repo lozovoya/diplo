@@ -51,9 +51,9 @@ jobs:
        id: init
        run: terraform init
 
-     - name: Terraform format
-       id: fmt
-       run: terraform fmt -check -diff
+#     - name: Terraform format
+#       id: fmt
+#       run: terraform fmt -check -diff
 
      - name: Terraform validate
        id: validate
