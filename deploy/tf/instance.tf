@@ -38,7 +38,7 @@ resource "yandex_compute_instance" "kube-node" {
   name        = "kube-node-${count.index}-${terraform.workspace}"
   platform_id = "standard-v1"
   zone        = "ru-central1-a"
-  count       = 2
+  count       = 3
   resources {
     cores  = 4
     memory = 4
