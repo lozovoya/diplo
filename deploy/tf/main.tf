@@ -24,7 +24,7 @@ provider "yandex" {
   zone = "ru-central1-a"
   #service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key.json"
   service_account_key_file = "${var.ya_key}"
-  cloud_id                 = "$b1gjtddi41p742jcni7p"
+  cloud_id                 = "$b1gjtddi41p742jcni7p111"
 }
 
 
