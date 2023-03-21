@@ -55,7 +55,7 @@ jobs:
 
      - name: set workspace
        id: workspace
-       run: terraform workspace new $BRANCH_NAME
+       run: terraform workspace select $BRANCH_NAME
 
      - name: Terraform plan
        id: plan
