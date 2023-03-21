@@ -40,7 +40,7 @@ jobs:
      - name: secret
        id: decode
        run: |
-           echo TF_VAR_ya_file_enc | base64 -d
+           echo TF_VAR_ya_file_enc
 
      - name: Terraform init
        id: init
