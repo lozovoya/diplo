@@ -14,8 +14,9 @@ on:
 
 env:
  # verbosity setting for Terraform logs
- TF_VAR_ya_key:  ${{ secrets.YANDEX_NETOLOGY }}
  TF_VAR_ssh_key: ${{ secrets.SSH_KEY}}
+ TF_VAR_ya_key: ${{ secrets.YA_KEY}}
+ TF_VAR_ya_file_enc: ${{ secrets.YA_FILE_ENC}}
 
 jobs:
  terraform:
@@ -35,6 +36,11 @@ jobs:
        uses: hashicorp/setup-terraform@v2
        with:
          terraform_version: 1.3.5
+
+     - name: secret
+       id: decode
+       run: |
+           echo TF_VAR_ya_file_enc | base64 -d
 
      - name: Terraform init
        id: init
