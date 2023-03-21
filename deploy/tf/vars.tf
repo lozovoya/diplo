@@ -1,6 +1,6 @@
 variable "ya_key" {
-  type        = string
+  type = string
 }
 variable "ssh_key" {
-  type        = string
+  type = string
 }
