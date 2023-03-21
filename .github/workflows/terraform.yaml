@@ -44,10 +44,6 @@ jobs:
        run: |
            echo $TF_VAR_ya_file_enc | base64 -d > key
 
-     - name: branch
-       id: branchName
-       run: echo $BRANCH_NAME
-
      - name: Terraform init
        id: init
        run: terraform init
@@ -55,6 +51,10 @@ jobs:
      - name: Terraform validate
        id: validate
        run: terraform validate
+
+     - name: set workspace
+       id: workspace
+       run: terraform workspace select $BRANCH_NAME
 
      - name: Terraform plan
        id: plan
