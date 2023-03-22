@@ -1,1 +1,1 @@
-kubeadm join 192.168.10.29:6443 --token 3dsfdp.vdcupi72b7sj14gb --discovery-token-ca-cert-hash sha256:a346e68396211a4e6ffd92eb48fc3b48c52fe5788a9f6693ca50510758624ef8 
+kubeadm join 192.168.10.31:6443 --token wm8hbv.wq47ehl3jkw3ns6s --discovery-token-ca-cert-hash sha256:916074f6799ed028c4ac92e4c4493a6939e6007df2654a339bcf1fac57a301db 

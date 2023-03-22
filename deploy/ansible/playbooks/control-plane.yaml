@@ -3,14 +3,14 @@
   hosts: k8s_masters
   remote_user: "{{ user }}"
   tasks:
-    - name: Reset Kubernetes
-      become: true
-      ansible.builtin.shell:
-        cmd: "kubeadm reset --force"
-    - name: Reset Kubernetes, clear net
-      become: true
-      ansible.builtin.shell:
-        cmd: "rm -rf /etc/cni/net.d"
+#    - name: Reset Kubernetes
+#      become: true
+#      ansible.builtin.shell:
+#        cmd: "kubeadm reset --force"
+#    - name: Reset Kubernetes, clear net
+#      become: true
+#      ansible.builtin.shell:
+#        cmd: "rm -rf /etc/cni/net.d"
     - name: Init master
       become: true
       ansible.builtin.shell:
