@@ -14,7 +14,7 @@
     - name: Init master
       become: true
       ansible.builtin.shell:
-        cmd: "kubeadm init --control-plane-endpoint=$HOSTNAME --pod-network-cidr=10.128.0.0/20 "
+        cmd: "kubeadm init --control-plane-endpoint=$HOSTNAME --pod-network-cidr=10.128.0.0/20 --apiserver-advertise-address=0.0.0.0 --apiserver-cert-extra-sans="
     - name: setup admin user
       ansible.builtin.shell:
         cmd: "mkdir -p $HOME/.kube && yes | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && sudo chown $(id -u):$(id -g) $HOME/.kube/config"

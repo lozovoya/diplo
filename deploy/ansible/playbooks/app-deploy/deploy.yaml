@@ -1,0 +1,29 @@
+---
+- name: Install diploma app
+  hosts: k8s_masters
+#  remote_user: '{{ user }}'
+  remote_user: "debian"
+  vars:
+     registry_token: '{{ lookup("env", "GITHUB_REGISTRY_TOKEN") }}'
+  tasks:
+    - name: Create namespaces
+      ansible.builtin.shell:
+        cmd: "kubectl create namespace develop && kubectl create namespace main"
+      ignore_errors: true
+    - name: Create image registry secret for develop namespace
+      ansible.builtin.shell:
+        cmd: "kubectl create secret docker-registry github-container-registry -n develop --docker-server=https://ghcr.io --docker-username=lozovoya --docker-password={{ registry_token }} --docker-email=lozovoya@gmail.com"
+      ignore_errors: true
+    - name: Create image registry secret for main namespace
+      ansible.builtin.shell:
+        cmd: "kubectl create secret docker-registry github-container-registry -n main --docker-server=https://ghcr.io --docker-username=lozovoya --docker-password={{ registry_token }} --docker-email=lozovoya@gmail.com"
+      ignore_errors: true
+    - name: Download app
+      ansible.builtin.shell:
+        cmd: "wget https://github.com/lozovoya/diplo2/raw/main/deploy/diplo-app-1.0.tgz && tar zxvf diplo-app-1.0.tgz"
+    - name: Template app
+      ansible.builtin.shell:
+        cmd: "helm template -f ./diplo-app/values-develop.yaml ./diplo-app > diplo-app.yaml"
+    - name: Deploy app
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f diplo-app.yaml"
