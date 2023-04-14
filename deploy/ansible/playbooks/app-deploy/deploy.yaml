@@ -41,10 +41,18 @@
       ansible.builtin.shell:
         cmd: "wget https://github.com/lozovoya/diplo2/raw/main/deploy/diplo-app-1.0.tgz && tar zxvf diplo-app-1.0.tgz"
 
-    - name: Template app
+    - name: Template develop app
       ansible.builtin.shell:
-        cmd: "helm template -f ./diplo-app/values-develop.yaml ./diplo-app > diplo-app.yaml"
+        cmd: "helm template -f ./diplo-app/values-develop.yaml ./diplo-app > diplo-app-develop.yaml"
 
-    - name: Deploy app
+    - name: Template main app
       ansible.builtin.shell:
-        cmd: "kubectl apply -f diplo-app.yaml"
+        cmd: "helm template -f ./diplo-app/values-main.yaml ./diplo-app > diplo-app-main.yaml"
+
+    - name: Deploy develop app
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f diplo-app-develop.yaml"
+
+    - name: Deploy main app
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f diplo-app-main.yaml"
