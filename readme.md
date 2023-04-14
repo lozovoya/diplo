@@ -12,10 +12,15 @@
 для инсталляции kubernetes используется ansible playbook ansible/setup-cluster.yaml
 
  playbooks/debian-prepare-server.yaml - общая подготовка серверов
+ 
  playbooks/install-nodes.yaml - инстал пакетов
+ 
  playbooks/control-plane.yaml - настройка master ноды
+ 
  playbooks/node.yaml - настройка worker нод
+ 
  playbooks/monitoring/kube-prometheus-stack.yaml - установка и настройка kube-prometheus-stack
+ 
  playbooks/deploy.yaml - деплой приложения с помощью helm. оно лежит архивом во второй репе.
 
 
