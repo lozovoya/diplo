@@ -4,4 +4,4 @@
 - import_playbook: playbooks/control-plane.yaml
 - import_playbook: playbooks/node.yaml
 - import_playbook: playbooks/monitoring/kube-prometheus-stack.yaml
-- import_playbook: playbooks/app-deploy/deploy.yaml
+#- import_playbook: playbooks/deploy.yaml
