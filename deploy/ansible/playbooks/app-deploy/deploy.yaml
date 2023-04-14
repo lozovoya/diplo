@@ -1,0 +1,58 @@
+---
+- name: Install diploma app
+  hosts: k8s_masters
+  remote_user: "debian"
+  vars:
+     registry_token: '{{ lookup("env", "GITHUB_REGISTRY_TOKEN") }}'
+  tasks:
+    - name: Check if namespace develop exists
+      ansible.builtin.shell:
+        cmd: "kubectl get namespace develop"
+      register: namespace_develop_output
+      ignore_errors: true
+
+    - name: Create namespaces develop
+      ansible.builtin.shell:
+        cmd: "kubectl create namespace develop"
+      when: namespace_develop_output.rc != 0
+
+    - name: Check if namespace main exists
+      ansible.builtin.shell:
+        cmd: "kubectl get namespace main"
+      register: namespace_main_output
+      ignore_errors: true
+
+    - name: Create namespaces main
+      ansible.builtin.shell:
+        cmd: "kubectl create namespace main"
+      when: namespace_main_output.rc != 0
+
+    - name: Create image registry secret for develop namespace
+      ansible.builtin.shell:
+        cmd: "kubectl create secret docker-registry github-container-registry -n develop --docker-server=https://ghcr.io --docker-username=lozovoya --docker-password={{ registry_token }} --docker-email=lozovoya@gmail.com"
+      ignore_errors: true
+
+    - name: Create image registry secret for main namespace
+      ansible.builtin.shell:
+        cmd: "kubectl create secret docker-registry github-container-registry -n main --docker-server=https://ghcr.io --docker-username=lozovoya --docker-password={{ registry_token }} --docker-email=lozovoya@gmail.com"
+      ignore_errors: true
+
+    - name: Download app
+      ansible.builtin.shell:
+        cmd: "wget https://github.com/lozovoya/diplo2/raw/main/deploy/diplo-app-1.0.tgz && tar zxvf diplo-app-1.0.tgz"
+
+    - name: Template develop app
+      ansible.builtin.shell:
+        cmd: "helm template -f ./diplo-app/values-develop.yaml ./diplo-app > diplo-app-develop.yaml"
+
+    - name: Template main app
+      ansible.builtin.shell:
+        cmd: "helm template -f ./diplo-app/values-main.yaml ./diplo-app > diplo-app-main.yaml"
+
+    - name: Deploy develop app
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f diplo-app-develop.yaml"
+
+    - name: Deploy main app
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f diplo-app-main.yaml"

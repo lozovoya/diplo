@@ -5,6 +5,7 @@
   vars:
     master_internal_ip: "{{ hostvars['k8s-master-01']['ansible_default_ipv4']['address']}}"
     node_internal_ip: "{{ hostvars['k8s-node-01']['ansible_default_ipv4']['address']}}"
+    extip: "{{hosts['kube-master-stage']['ansible_host']}}"
   tasks:
     - name: Set LC_CTYPE
       become: true
