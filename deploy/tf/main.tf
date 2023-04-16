@@ -11,8 +11,8 @@ terraform {
     bucket                      = "terraform-dsfdsfdsfds8768767823"
     region                      = "ru-central1"
     key                         = "tfstates/netology-diploma.tfstate"
-    access_key                  = "YCAJEUOQu23zja1acCosoIx6Z"
-    secret_key                  = "YCOCKS2xFS6YHH1fubLYjzsAkCgQjnFh0bGzMIag"
+    access_key                  = "${var.ya_key}"
+    secret_key                  = "${var.ya_token}"
     skip_region_validation      = true
     skip_credentials_validation = true
   }
