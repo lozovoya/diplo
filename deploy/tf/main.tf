@@ -22,7 +22,7 @@ terraform {
 
 provider "yandex" {
   zone = "ru-central1-a"
-#
+
   service_account_key_file = "${var.key_path}"
   #service_account_key_file = "key"
 
