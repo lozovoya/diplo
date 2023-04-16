@@ -48,7 +48,7 @@ jobs:
      - name: Terraform init
        id: init
        run: terraform init -reconfigure --backend-config "access_key=$TF_VAR_ya_key" --backend-config "secret_key=$TF_VAR_ya_token"
-#11
+
 
      - name: Terraform validate
        id: validate
