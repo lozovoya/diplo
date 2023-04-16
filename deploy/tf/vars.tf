@@ -7,3 +7,6 @@ variable "ssh_key" {
 variable "ya_token" {
   type = string
 }
+variable "key_path" {
+  type = string
+}
