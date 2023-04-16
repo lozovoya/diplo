@@ -19,7 +19,7 @@ env:
  TF_VAR_ya_key: ${{ secrets.YA_KEY}}
  TF_VAR_ya_file_enc: ${{ secrets.YA_FILE_ENC}}
  TF_VAR_ya_token: ${{ secrets.YA_TOKEN}}
- TF_VAR_key_path: ${{ vars.KEY_PATH}}
+ TF_VAR_key_path: ${{ env.KEY_PATH}}
  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
