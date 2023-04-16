@@ -22,9 +22,9 @@ terraform {
 
 provider "yandex" {
   zone = "ru-central1-a"
-#
-  #service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key2.json"
-  service_account_key_file = "key"
+
+  service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key2.json"
+  #service_account_key_file = "key"
 
   cloud_id                 = "$b1gjtddi41p742jcni7p"
   folder_id = "b1gle7ifnhht4mllgeg6"

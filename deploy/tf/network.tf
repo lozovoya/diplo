@@ -1,6 +1,5 @@
 resource "yandex_vpc_network" "netology" {
   name = "netology-${terraform.workspace}"
-
 }
 
 resource "yandex_vpc_subnet" "public-a" {
