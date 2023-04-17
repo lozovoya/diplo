@@ -11,8 +11,8 @@ terraform {
     bucket                      = "terraform-dsfdsfdsfds8768767823"
     region                      = "ru-central1"
     key                         = "tfstates/netology-diploma.tfstate"
-    access_key                  = "YCAJEUOQu23zja1acCosoIx6Z"
-    secret_key                  = "YCOCKS2xFS6YHH1fubLYjzsAkCgQjnFh0bGzMIag"
+    access_key                  = "${var.ya_key}"
+    secret_key                  = "${var.ya_token}"
     skip_region_validation      = true
     skip_credentials_validation = true
   }
@@ -22,10 +22,7 @@ terraform {
 
 provider "yandex" {
   zone = "ru-central1-a"
-
-  service_account_key_file = "/Users/Andrey_Lozovoy/.yc/key2.json"
-  #service_account_key_file = "key"
-
+  service_account_key_file = "${var.key_path}"
   cloud_id                 = "$b1gjtddi41p742jcni7p"
   folder_id = "b1gle7ifnhht4mllgeg6"
 }
