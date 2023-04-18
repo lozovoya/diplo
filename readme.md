@@ -10,10 +10,11 @@ https://github.com/lozovoya/diplo/blob/main/deploy/tf/main.tf
 
 Ожидаемый результат:
 
-Работоспособный Kubernetes кластер.
-В файле ~/.kube/config находятся данные для доступа к кластеру. 
-Команда kubectl get pods --all-namespaces отрабатывает без ошибок.
+1. Работоспособный Kubernetes кластер.
 
+2. В файле ~/.kube/config находятся данные для доступа к кластеру. 
+
+3. Команда kubectl get pods --all-namespaces отрабатывает без ошибок.
 
 доступ к кластеру реализован через ssh
 https://github.com/lozovoya/diplo/blob/main/deploy/ansible/setup-cluster.yaml
@@ -22,12 +23,14 @@ https://github.com/lozovoya/diplo/blob/main/deploy/ansible/setup-cluster.yaml
 
 Ожидаемый результат:
 
-Git репозиторий с тестовым приложением и Dockerfile. https://github.com/lozovoya/diplo2/blob/main/main.go
-Регистр с собранным docker image. В качестве регистра может быть DockerHub или Yandex Container Registry, созданный также с помощью terraform (использован github registry)
+1. Git репозиторий с тестовым приложением и Dockerfile. https://github.com/lozovoya/diplo2/blob/main/main.go
+
+2. Регистр с собранным docker image. В качестве регистра может быть DockerHub или Yandex Container Registry, созданный также с помощью terraform (использован github registry)
 
 
 ## проект реализован в 2-х репозиториях:
 1. инфраструктура (terraform и ansible) https://github.com/lozovoya/diplo
+
 2. приложение написанное на go, выводит html страницу с приветствием https://github.com/lozovoya/diplo2
 
 
@@ -35,18 +38,23 @@ Git репозиторий с тестовым приложением и Dockerf
 
 Ожидаемый результат:
 
-Git репозиторий с конфигурационными файлами для настройки Kubernetes. https://github.com/lozovoya/diplo/blob/main/deploy/ansible/playbooks/monitoring/kube-prometheus-stack.yaml
-Http доступ к web интерфейсу grafana.
-Дашборды в grafana отображающие состояние Kubernetes кластера.
-Http доступ к тестовому приложению.
+1. Git репозиторий с конфигурационными файлами для настройки Kubernetes. https://github.com/lozovoya/diplo/blob/main/deploy/ansible/playbooks/monitoring/kube-prometheus-stack.yaml
+
+2. Http доступ к web интерфейсу grafana.
+
+3. Дашборды в grafana отображающие состояние Kubernetes кластера.
+
+4. Http доступ к тестовому приложению.
 
 ## Установка и настройка CI/CD
 
 Ожидаемый результат:
 
-Интерфейс ci/cd сервиса доступен по http.
-При любом коммите в репозиторие с тестовым приложением происходит сборка и отправка в регистр Docker образа. https://github.com/lozovoya/diplo2/blob/main/.github/workflows/diplo-app-develop.yaml
-При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes. https://github.com/lozovoya/diplo2/blob/main/.github/workflows/diplo-app-main.yaml
+1. Интерфейс ci/cd сервиса доступен по http.
+
+2. При любом коммите в репозиторие с тестовым приложением происходит сборка и отправка в регистр Docker образа. https://github.com/lozovoya/diplo2/blob/main/.github/workflows/diplo-app-develop.yaml
+
+3. При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes. https://github.com/lozovoya/diplo2/blob/main/.github/workflows/diplo-app-main.yaml
 
 # описание деплоя инфраструктуры
 
