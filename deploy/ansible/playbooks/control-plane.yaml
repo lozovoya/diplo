@@ -17,11 +17,11 @@
         cmd: "kubeadm init --control-plane-endpoint=$HOSTNAME --pod-network-cidr=10.128.0.0/20 --apiserver-advertise-address=0.0.0.0 --apiserver-cert-extra-sans="
     - name: setup admin user
       ansible.builtin.shell:
-        cmd: "mkdir -p $HOME/.kube && yes | sudo cp -i /etc/kubernetesqqq/admin.conf $HOME/.kube/config && sudo chown $(id -u):$(id -g) $HOME/.kube/config"
+        cmd: "mkdir -p $HOME/.kube && yes | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && sudo chown $(id -u):$(id -g) $HOME/.kube/config"
     - name: Copy admin.conf to su folder
       become: true
       ansible.builtin.shell:
-        cmd: "cp /etc/kubernetesqqq/admin.conf /root/.kube/config"
+        cmd: "cp /etc/kubernetes/admin.conf /root/.kube/config"
       ignore_errors: true
     - name: Get the token for joining the worker nodes
       become: yes
