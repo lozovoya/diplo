@@ -27,29 +27,29 @@
       become: true
       ansible.builtin.shell:
         cmd: "modprobe overlay && modprobe br_netfilter"
-    - name: Create kubernetesqqq-k8s config
+    - name: Create kubernetes-k8s config
       become: true
       ansible.builtin.file:
-        path: "/etc/sysctl.d/99-kubernetesqqq-k8s.conf"
+        path: "/etc/sysctl.d/99-kubernetes-k8s.conf"
         state: touch
     - name: add bridge-nf-call-iptables
       become: true
       ansible.builtin.lineinfile:
-        path: "/etc/sysctl.d/99-kubernetesqqq-k8s.conf"
+        path: "/etc/sysctl.d/99-kubernetes-k8s.conf"
         regexp: "net.bridge.bridge-nf-call-iptables = 1"
         line: "net.bridge.bridge-nf-call-iptables = 1"
         state: present
     - name: add ipv4.ip_forward
       become: true
       ansible.builtin.lineinfile:
-        path: "/etc/sysctl.d/99-kubernetesqqq-k8s.conf"
+        path: "/etc/sysctl.d/99-kubernetes-k8s.conf"
         regexp: "net.ipv4.ip_forward = 1"
         line: "net.ipv4.ip_forward = 1"
         state: present
     - name: add bridge-nf-call-ip6tables
       become: true
       ansible.builtin.lineinfile:
-        path: "/etc/sysctl.d/99-kubernetesqqq-k8s.conf"
+        path: "/etc/sysctl.d/99-kubernetes-k8s.conf"
         regexp: "net.bridge.bridge-nf-call-ip6tables = 1"
         line: "net.bridge.bridge-nf-call-ip6tables = 1"
         state: present
@@ -141,12 +141,12 @@
     - name: Add repo
       become: true
       ansible.builtin.shell:
-        cmd: 'apt-add-repository "deb http://apt.kubernetesqqq.io/ kubernetesqqq-xenial main"'
+        cmd: 'apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"'
     - name: Apt update
       become: true
       ansible.builtin.apt:
         update_cache: yes
-    - name: Install kubernetesqqq
+    - name: Install kubernetes
       become: true
       ansible.builtin.apt:
         name:
